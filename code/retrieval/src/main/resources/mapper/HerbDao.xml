@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnherb.retrieval.dao.HerbDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <select id="queryById" resultType="Herb" parameterType="long">
+        <!-- 具体的sql -->
+        SELECT
+            id,
+            name,
+            image,
+            descript
+        FROM
+            Herb
+        WHERE
+            id = #{id}
+    </select>
+    <select id="queryByName" resultType="Herb" parameterType="String">
+        <!-- 具体的sql -->
+        SELECT
+            id,
+            name,
+            image,
+            descript
+        FROM
+            Herb
+        WHERE
+            name = #{name}
+    </select>
+    <select id="queryAll" resultType="Herb">
+        SELECT
+            id,
+            name,
+            number
+        FROM
+            Herb
+        ORDER BY
+            id
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>
