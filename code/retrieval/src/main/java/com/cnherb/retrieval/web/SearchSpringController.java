@@ -11,14 +11,14 @@ import com.cnherb.retrieval.entity.Herb;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
-public class HelloSpringController {
+public class SearchSpringController {
 	
     @Autowired
     private HerbDao HerbDao;
     
     String message = "Welcome to Spring MVC!!!";
  
-    @RequestMapping("/hello")
+    @RequestMapping("/search")
     public ModelAndView showMessage(@RequestParam(value = "name", required = false, defaultValue = "Spring") String name) {
  
     	
@@ -34,7 +34,7 @@ public class HelloSpringController {
     	
     	//String Herbname = "test";
     //	System.out.print(Herb);
-        ModelAndView mv = new ModelAndView("hellospring");
+        ModelAndView mv = new ModelAndView("searchspring");
         
         mv.addObject("message", message);
         mv.addObject("name", name);

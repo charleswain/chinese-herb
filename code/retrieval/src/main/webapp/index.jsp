@@ -20,11 +20,11 @@
 		var txt = document.getElementById("search");
 		
 		btn.onclick = function(){
-	    	window.location.assign("hello?name="+txt.value);
+	    	window.location.assign("search?name="+txt.value);
 		}
 		txt.onkeydown = function(e){
 			if(e.keyCode == 13){
-				window.location.assign("hello?name="+txt.value);
+				window.location.assign("search?name="+txt.value);
 			}
 		};
 	</script>
