@@ -27,7 +27,7 @@ public class TestCase1 extends SpringTestBase {
     	}
     	
     	System.out.println(image);
-    	Assert.assertTrue(true);
+    	Assert.assertTrue(image !=null);
 	}
         
 }
