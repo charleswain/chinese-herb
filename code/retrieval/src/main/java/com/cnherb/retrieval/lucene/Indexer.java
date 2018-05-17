@@ -5,14 +5,19 @@ import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+//import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.Analyzer;
+import org.wltea.analyzer.lucene.IKAnalyzer;
+
 
 public class Indexer {
 
@@ -24,10 +29,18 @@ public class Indexer {
          FSDirectory.open(new File(indexDirectoryPath));
 
       //create the indexer
-      writer = new IndexWriter(indexDirectory, 
-         new StandardAnalyzer(Version.LUCENE_36),true,
-         IndexWriter.MaxFieldLength.UNLIMITED);
+//      writer = new IndexWriter(indexDirectory, 
+//         new StandardAnalyzer(Version.LUCENE_36),true,
+//         IndexWriter.MaxFieldLength.UNLIMITED);
+      Analyzer  analyzer = new IKAnalyzer(true);
+      
+      IndexWriterConfig writeConfig = new IndexWriterConfig(Version.LUCENE_4_10_1, analyzer);
+      writeConfig.setMaxBufferedDocs(9);
+      writeConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+      writer = new IndexWriter(indexDirectory,writeConfig);
+      
    }
+  
 
    public void close() throws CorruptIndexException, IOException{
       writer.close();
@@ -37,16 +50,16 @@ public class Indexer {
       Document document = new Document();
 
       //index file contents
-      Field contentField = new Field(LuceneConstants.CONTENTS, 
+      Field contentField = new TextField(LuceneConstants.CONTENTS, 
          new FileReader(file));
       //index file name
-      Field fileNameField = new Field(LuceneConstants.FILE_NAME,
+      Field fileNameField = new TextField(LuceneConstants.FILE_NAME,
          file.getName(),
-         Field.Store.YES,Field.Index.NOT_ANALYZED);
+         Field.Store.YES);
       //index file path
-      Field filePathField = new Field(LuceneConstants.FILE_PATH,
+      Field filePathField = new TextField(LuceneConstants.FILE_PATH,
          file.getCanonicalPath(),
-         Field.Store.YES,Field.Index.NOT_ANALYZED);
+         Field.Store.YES);
 
       document.add(contentField);
       document.add(fileNameField);

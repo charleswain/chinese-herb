@@ -6,8 +6,10 @@ import java.io.IOException;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -15,6 +17,8 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.Analyzer;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 public class Searcher {
 	
@@ -23,12 +27,16 @@ public class Searcher {
    Query query;
    
 public Searcher(String indexDirectoryPath) throws IOException{
-      Directory indexDirectory = FSDirectory.open(new File(indexDirectoryPath));
-      indexSearcher = new IndexSearcher(indexDirectory);
-      queryParser = new QueryParser(Version.LUCENE_36,
+	  File indexDir = new File(indexDirectoryPath);
+      Directory indexDirectory = FSDirectory.open(indexDir);
+      DirectoryReader iReader = DirectoryReader.open(indexDirectory);
+      
+      indexSearcher = new IndexSearcher(iReader);
+      queryParser = new QueryParser(Version.LUCENE_4_10_1,
          LuceneConstants.CONTENTS,
-         new StandardAnalyzer(Version.LUCENE_36)
+         new IKAnalyzer()
       );
+     // queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
    }
    
    public TopDocs search( String searchQuery) 
@@ -43,6 +51,6 @@ public Searcher(String indexDirectoryPath) throws IOException{
    }
 
    public void close() throws IOException{
-      indexSearcher.close();
+    //  indexSearcher.close();
    }
 }

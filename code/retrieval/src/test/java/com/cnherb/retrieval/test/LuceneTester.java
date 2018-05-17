@@ -2,10 +2,13 @@ package com.cnherb.retrieval.test;
 
 import java.io.IOException;
 
+import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.document.Document;
-import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.util.Version;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -16,11 +19,16 @@ public class LuceneTester {
 //   private String dataDir = "E:/Lucene/Data";
    private Searcher searcher;
 
+   
    @Test
-   public void searchNotFound() throws IOException, ParseException{
-	  String searchQuery = "数据";
+   public void searchNotFound() throws IOException,ParseException{
+	  String searchQuery = "信息";
+
       searcher = new Searcher(indexDir);
       long startTime = System.currentTimeMillis();
+//      QueryParser parser = new QueryParser(Version.LUCENE_42);
+//      Query query = parser.parse(searchQuery);
+      
       TopDocs hits = searcher.search(searchQuery);
       long endTime = System.currentTimeMillis();
    
@@ -37,7 +45,7 @@ public class LuceneTester {
 	
 	@Test
 	 public void searchFound() throws IOException, ParseException{
-		  String searchQuery = "hello";
+		  String searchQuery = "hello world";
 	      searcher = new Searcher(indexDir);
 	      long startTime = System.currentTimeMillis();
 	      TopDocs hits = searcher.search(searchQuery);
