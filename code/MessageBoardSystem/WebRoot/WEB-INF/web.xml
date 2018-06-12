@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <servlet>
+  <servlet-name>ValidationCode</servlet-name>
+  <servlet-class>com.cnblogs.jbelial.Validation.ValidationCode</servlet-class>
+ </servlet>
+ 
+ <servlet>
+  <description>This is the description of my J2EE component</description>
+  <display-name>This is the display name of my J2EE component</display-name>
+  <servlet-name>DBServlet</servlet-name>
+  <servlet-class>com.cnblogs.jbelial.DBServlet.DBServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <description>This is the description of my J2EE component</description>
+  <display-name>This is the display name of my J2EE component</display-name>
+  <servlet-name>RegisterServlet</servlet-name>
+  <servlet-class>com.cnblogs.jbelial.Register.RegisterServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <description>This is the description of my J2EE component</description>
+  <display-name>This is the display name of my J2EE component</display-name>
+  <servlet-name>LoginServlet</servlet-name>
+  <servlet-class>com.cnblogs.jbelial.Login.LoginServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <description>This is the description of my J2EE component</description>
+  <display-name>This is the display name of my J2EE component</display-name>
+  <servlet-name>addMessageServlet</servlet-name>
+  <servlet-class>com.cnblogs.jbelial.addServlet.addMessageServlet</servlet-class>
+ </servlet>
+ 
+ <servlet-mapping>
+  <servlet-name>ValidationCode</servlet-name>
+  <url-pattern>/ValidationCode</url-pattern>
+ </servlet-mapping>
+ 
+ <servlet-mapping>
+  <servlet-name>DBServlet</servlet-name>
+  <url-pattern>/DBServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>RegisterServlet</servlet-name>
+  <url-pattern>/RegisterServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>LoginServlet</servlet-name>
+  <url-pattern>/LoginServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>addMessageServlet</servlet-name>
+  <url-pattern>/addMessageServlet</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>login.jsp</welcome-file>
+ </welcome-file-list>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>
