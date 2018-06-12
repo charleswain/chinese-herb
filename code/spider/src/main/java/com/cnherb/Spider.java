@@ -12,14 +12,15 @@ import java.sql.*;
 
 public class  Spider {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/cnherb";
+	static final String DB_URL = "jdbc:mysql://localhost/cnherb?characterEncoding=UTF-8";
 	static final String USER="root";
-	static final String PASSWORD = "admin";
+	static final String PASSWORD = "wx1fb381ba6beed623";
 	
 
     public static void main(String[] args){
         String[] keywordArr = {
-        		"人参","甘草","麻黄","桂枝","生姜","香薷","紫苏","荆芥","薄荷","桑叶"
+        		"人参","甘草","麻黄","桂枝","生姜","香薷","紫苏","荆芥","薄荷","桑叶",
+        		"菟丝子","茯苓","桔梗","厚朴","大黄"
         };
         String[] result = new String[2];
         String url = "https://baike.baidu.com/item/";
@@ -55,7 +56,7 @@ public class  Spider {
     		//打开链接
     		System.out.println("连接数据库");
     		conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-    		//执行查询
+    		//执行查询	
     		System.out.println("实例化Statement对象");
     		stmt = conn.createStatement();
     		String sql;

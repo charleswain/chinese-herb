@@ -33,7 +33,7 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 
 public class IKAnalyzerTest {
 	
-	 @Test
+	 //@Test
 	 public void  index()  throws IOException {
         String ID;
         String content;
@@ -170,15 +170,17 @@ public class IKAnalyzerTest {
         }
 	}
 	
+	@Test
 	public void analyzer() {
-		 String keyWord = "IKAnalyzer的分词效果到底怎么样呢，我们来看一下吧：这里是简单的数据";  
+		String keyWord = "治肾经久积阴寒，膀胱虚冷，下元衰惫，耳重唇焦，腰腿肿疼，脐腹撮痛，两胁刺胀，小腹坚疼，下部湿痒，夜梦遗精，恍惚多惊，皮肤干燥，面无光泽，口淡无味，不思饮食，大便溏泄，小便滑数，精神不爽，事多健忘。 常服补元阳，益肾气。  ";  
 	        //创建IKAnalyzer中文分词对象  
 	        IKAnalyzer analyzer = new IKAnalyzer(true);  
 	        // 使用智能分词  
 	        //analyzer.setUseSmart(true);  
 	        // 打印分词结果  
 	        try {  
-	            printAnalysisResult(analyzer, keyWord);  
+	            String result = printAnalysisResult(analyzer, keyWord);  
+	            System.out.println(result);
 	        } catch (Exception e) {  
 	            e.printStackTrace();  
 	        }  
@@ -194,18 +196,21 @@ public class IKAnalyzerTest {
      *            关键词 
      * @throws Exception 
      */  
-    private static void printAnalysisResult(Analyzer analyzer, String keyWord)  
+    private static String printAnalysisResult(Analyzer analyzer, String keyWord)  
             throws Exception {  
         System.out.println("["+keyWord+"]分词效果如下");  
         TokenStream tokenStream = analyzer.tokenStream("content",  
                 new StringReader(keyWord));  
         tokenStream.addAttribute(CharTermAttribute.class);  
         tokenStream.reset();
+        String result="";
         while (tokenStream.incrementToken()) {  
             CharTermAttribute charTermAttribute = tokenStream  
                     .getAttribute(CharTermAttribute.class);  
-            System.out.println(charTermAttribute.toString());  
+            result+=charTermAttribute.toString() +"\n";
+           // System.out.println(charTermAttribute.toString());  
   
-        }  
+        } 
+        return result;
     }  
 }

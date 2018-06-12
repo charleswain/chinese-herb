@@ -9,8 +9,12 @@
 </head>
 <body>
 <div>
+<a style="float:right;" href="">如需留言请登录；没有账号？点击这里注册。<a>
 	<input id="search" type="text" value="${name}"  />
 	<button  id="searchbtn" type="button">搜索</button>
+	<div style="margin-top:20px;">
+	<a id="back" href="prescription?name=">试试方剂全文检索？</a>
+	</div>
 </div>
     <center>
          <h2>
@@ -31,6 +35,9 @@
     	<script>
 		var btn = document.getElementById("searchbtn");
 		var txt = document.getElementById("search");
+		var ahref = document.getElementById("back");
+		
+		ahref.href="prescription?name="+txt.value;
 		
 		btn.onclick = function(){
 	    	window.location.assign(encodeURI("search?name="+txt.value));

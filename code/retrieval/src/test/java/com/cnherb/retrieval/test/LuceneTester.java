@@ -22,7 +22,7 @@ public class LuceneTester {
    
    @Test
    public void searchNotFound() throws IOException,ParseException{
-	  String searchQuery = "信息";
+	  String searchQuery = "编码";
 
       searcher = new Searcher(indexDir);
       long startTime = System.currentTimeMillis();
@@ -33,32 +33,32 @@ public class LuceneTester {
       long endTime = System.currentTimeMillis();
    
       System.out.println(hits.totalHits +
-         " documents found. Time :" + (endTime - startTime));
+         " documents found "+searchQuery +". Time :" + (endTime - startTime));
       for(ScoreDoc scoreDoc : hits.scoreDocs) {
          Document doc = searcher.getDocument(scoreDoc);
             System.out.println("File: "
             + doc.get(LuceneConstants.FILE_PATH));
       }
       searcher.close();
-      Assert.assertTrue(true);
+      Assert.assertTrue(hits.totalHits ==0);
    }
 	
 	@Test
 	 public void searchFound() throws IOException, ParseException{
-		  String searchQuery = "hello world";
+		  String searchQuery = "接口";
 	      searcher = new Searcher(indexDir);
 	      long startTime = System.currentTimeMillis();
 	      TopDocs hits = searcher.search(searchQuery);
 	      long endTime = System.currentTimeMillis();
 	   
 	      System.out.println(hits.totalHits +
-	         " documents found. Time :" + (endTime - startTime));
+	         " documents found "+searchQuery +". Time :" + (endTime - startTime));
 	      for(ScoreDoc scoreDoc : hits.scoreDocs) {
 	         Document doc = searcher.getDocument(scoreDoc);
 	            System.out.println("File: "
 	            + doc.get(LuceneConstants.FILE_PATH));
 	      }
 	      searcher.close();
-	      Assert.assertTrue(true);
+	      Assert.assertTrue(hits.totalHits>0);
 	  }
 }

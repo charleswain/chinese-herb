@@ -8,13 +8,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cnherb.retrieval.dao.HerbDao;
 import com.cnherb.retrieval.entity.Herb;
+import com.cnherb.retrieval.dao.PrescriptionDao;
+import com.cnherb.retrieval.entity.Prescription;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.*;
 
 @Controller
 public class SearchSpringController {
 	
     @Autowired
     private HerbDao HerbDao;
+    @Autowired
+    private PrescriptionDao PrescriptionDao;
     
     String message = "Welcome to Spring MVC!!!";
  
@@ -42,4 +48,19 @@ public class SearchSpringController {
         mv.addObject("image",image);
         return mv;
     }
+    
+    @RequestMapping("/prescription")
+    public ModelAndView prescription(@RequestParam(value = "name", required = false, defaultValue = "Spring") String name) {
+    	
+    	List<Prescription> Prescription = PrescriptionDao.queryAll(name,1, 10);
+
+        ModelAndView mv = new ModelAndView("prescription");
+
+        mv.addObject("name", name);
+        mv.addObject("prescription", Prescription);
+        return mv;
+    }
+    
+    
+
 }

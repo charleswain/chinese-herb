@@ -18,7 +18,7 @@ public class  SpiderPrescription2 {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/cnherb?useUnicode=true&characterEncoding=utf-8";
 	static final String USER="root";
-	static final String PASSWORD = "admin";
+	static final String PASSWORD = "wx1fb381ba6beed623";
 	
 
     public static void main(String[] args) throws  InterruptedException, Exception {
@@ -52,7 +52,7 @@ public class  SpiderPrescription2 {
 	            	getResult = Get_Url(url ,"");
 	            	getResult.put("id", key);
 	                System.out.println(getResult);
-	                update(getResult);
+	                //update(getResult);
 	              //  break;
 	
 	          // insert(data);

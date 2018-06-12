@@ -36,7 +36,7 @@ public Searcher(String indexDirectoryPath) throws IOException{
          LuceneConstants.CONTENTS,
          new IKAnalyzer()
       );
-     // queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
+      //queryParser.setDefaultOperator(QueryParser.AND_OPERATOR);
    }
    
    public TopDocs search( String searchQuery) 
